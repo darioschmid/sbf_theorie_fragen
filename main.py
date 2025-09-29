@@ -78,15 +78,16 @@ def main():
     <meta charset="UTF-8">
     <title>SBF Binnen Theoriefragen</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f8f8f8; color: #222; margin: 0; padding: 0 0 40px 0;}
-        h1, h2 { text-align: center; }
+        body { font-family: Arial, sans-serif; background: #181a1b; color: #eaeaea; margin: 0; padding: 0 0 40px 0;}
+        h1, h2 { text-align: center; color: #fafafa; }
         h1 { margin-top: 30px; }
         h2 { margin-top: 40px; }
-        details { background: #fff; border-radius: 6px; box-shadow: 0 1px 4px #ccc; margin: 20px auto 0 auto; max-width: 800px; padding: 10px 18px; }
-        summary { font-weight: bold; cursor: pointer; }
-        ol { max-width: 800px; margin: 10px auto 0 auto; background: #fff; border-radius: 6px; padding: 10px 30px; }
-        img { display: block; margin: 10px auto; border-radius: 4px; box-shadow: 0 1px 4px #bbb; }
+        details { background: #232527; border-radius: 6px; box-shadow: 0 1px 4px #222; margin: 20px auto 0 auto; max-width: 800px; padding: 10px 18px; color: #eaeaea; }
+        summary { font-weight: bold; cursor: pointer; color: #fafafa; }
+        ol { max-width: 800px; margin: 10px auto 0 auto; background: #232527; border-radius: 6px; padding: 10px 30px; color: #eaeaea; }
+        img { display: block; margin: 10px auto; border-radius: 4px; box-shadow: 0 1px 4px #444; background: #232527; }
         div { text-align: center; }
+        a { color: #8ab4f8; }
         @media (max-width: 900px) {
             details, ol { max-width: 98vw; }
         }
