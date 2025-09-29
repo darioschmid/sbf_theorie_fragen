@@ -72,8 +72,29 @@ def main():
     spezifische_fragen_segel = get_questions_answers('questions/spezifische_fragen_segeln.txt')
     images_dict = load_images('images.json')
 
-    html = '<!DOCTYPE html>\n<html lang="de">\n<head>\n    <meta charset="UTF-8">\n    <title>SBF Binnen Theoriefragen</title>\n</head>\n<body>\n'
-    html += '    <h1>SBF Binnen Theoriefragen (Segel + Motor)</h1>\n'
+    html = '''<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>SBF Binnen Theoriefragen</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8f8f8; color: #222; margin: 0; padding: 0 0 40px 0;}
+        h1, h2 { text-align: center; }
+        h1 { margin-top: 30px; }
+        h2 { margin-top: 40px; }
+        details { background: #fff; border-radius: 6px; box-shadow: 0 1px 4px #ccc; margin: 20px auto 0 auto; max-width: 800px; padding: 10px 18px; }
+        summary { font-weight: bold; cursor: pointer; }
+        ol { max-width: 800px; margin: 10px auto 0 auto; background: #fff; border-radius: 6px; padding: 10px 30px; }
+        img { display: block; margin: 10px auto; border-radius: 4px; box-shadow: 0 1px 4px #bbb; }
+        div { text-align: center; }
+        @media (max-width: 900px) {
+            details, ol { max-width: 98vw; }
+        }
+    </style>
+</head>
+<body>
+    <h1>SBF Binnen Theoriefragen (Segel + Motor)</h1>
+'''
     html += df_to_html_section(basisfragen, "Basisfragen", images_dict)
     html += df_to_html_section(spezifische_fragen_binnen, "Spezifische Fragen Binnen", images_dict)
     html += df_to_html_section(spezifische_fragen_segel, "Spezifische Fragen Segel", images_dict)
