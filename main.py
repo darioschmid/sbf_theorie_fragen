@@ -79,7 +79,7 @@ def main():
     html += df_to_html_section(spezifische_fragen_segel, "Spezifische Fragen Segel", images_dict)
     html += '</body>\n</html>'
 
-    with open('sbf_binnen_fragen.html', 'w', encoding='utf-8') as f:
+    with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html)
 
 if __name__ == "__main__":
