@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-import json
+import json5 as json
 
 random.seed(1)
 
@@ -35,13 +35,20 @@ def get_questions_answers(filename):
 
 def load_images(images_json):
     with open(images_json, 'r', encoding='utf-8') as f:
-        images = json.load(f)["images"]
-    images_dict = {}
-    for image in images:
+        images = json.load(f)
+    images_dict_sbf_binnen = {}
+    for image in images["images_sbf_binnen"]:
         nr = image["question_no"]
-        if nr not in images_dict:
-            images_dict[nr] = []
-        images_dict[nr].append(image)
+        if nr not in images_dict_sbf_binnen:
+            images_dict_sbf_binnen[nr] = []
+        images_dict_sbf_binnen[nr].append(image)
+    images_dict_sbf_see = {}
+    for image in images["images_sbf_see"]:
+        nr = image["question_no"]
+        if nr not in images_dict_sbf_see:
+            images_dict_sbf_see[nr] = []
+        images_dict_sbf_see[nr].append(image)
+    images_dict = {"sbf_binnen": images_dict_sbf_binnen, "sbf_see": images_dict_sbf_see}
     return images_dict
 
 def df_to_html_section(df, title, images_dict):
@@ -70,13 +77,14 @@ def main():
     basisfragen = get_questions_answers('questions/basisfragen.txt')
     spezifische_fragen_binnen = get_questions_answers('questions/spezifische_fragen_binnen.txt')
     spezifische_fragen_segel = get_questions_answers('questions/spezifische_fragen_segeln.txt')
+    spezifische_fragen_see = get_questions_answers('questions/spezifische_fragen_see.txt')
     images_dict = load_images('images.json')
 
     html = '''<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>SBF Binnen Theoriefragen</title>
+    <title>SBF Theoriefragen SBF Binnen (Segel + Motor) und See </title>
     <style>
         body { font-family: Arial, sans-serif; background: #181a1b; color: #eaeaea; margin: 0; padding: 0 0 40px 0;}
         h1, h2 { text-align: center; color: #fafafa; }
@@ -96,9 +104,10 @@ def main():
 <body>
     <h1>SBF Binnen Theoriefragen (Segel + Motor)</h1>
 '''
-    html += df_to_html_section(basisfragen, "Basisfragen", images_dict)
-    html += df_to_html_section(spezifische_fragen_binnen, "Spezifische Fragen Binnen", images_dict)
-    html += df_to_html_section(spezifische_fragen_segel, "Spezifische Fragen Segel", images_dict)
+    html += df_to_html_section(basisfragen, "Basisfragen", images_dict["sbf_binnen"])
+    html += df_to_html_section(spezifische_fragen_binnen, "Spezifische Fragen Binnen", images_dict["sbf_binnen"])
+    html += df_to_html_section(spezifische_fragen_segel, "Spezifische Fragen Segel", images_dict["sbf_binnen"])
+    html += df_to_html_section(spezifische_fragen_see, "Spezifische Fragen See", images_dict["sbf_see"])
     html += '</body>\n</html>'
 
     with open('index.html', 'w', encoding='utf-8') as f:
